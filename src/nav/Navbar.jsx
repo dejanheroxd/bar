@@ -1,14 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function Navbar() {
-  const [navOpen, setNavOpen] = useState(false);
-
-  function toggleNav() {
-    setNavOpen(!navOpen);
-  }
-
+export default function Navbar({ onToggleNav, navOpen }) {
   const navVars = {
     initial: { opacity: 0, y: -150 },
     animate: {
@@ -92,7 +85,7 @@ export default function Navbar() {
             </h1>
           </div>
           <div
-            onClick={() => toggleNav()}
+            onClick={() => onToggleNav()}
             className="pt-[9px] h-10 w-10 hover:cursor-pointer z-50"
           >
             <motion.span
@@ -125,7 +118,7 @@ export default function Navbar() {
               initial="initial"
               animate="animate"
               exit="exit"
-              className="bg-white z-40 text-secondary flex flex-col justify-center items-center h-screen w-screen fixed inset-0"
+              className="z-40 bg-primary text-secondary flex flex-col justify-center items-center h-screen w-screen fixed inset-0"
             >
               <div className="flex-col flex text-center gap-y-9 text-lg">
                 <Link to="/">Home</Link>

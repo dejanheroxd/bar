@@ -1,12 +1,33 @@
-import React from "react";
-import BarBg from "../../assets/barBg.webp"; // Import the image
+import React, { useState } from "react";
+import BarBg from "../../assets/barBg.webp";
 
-export default function HeroSection() {
+export default function HeroSection({ navOpen }) {
+  const [hidden, setHidden] = useState(false);
+
+  const toggleHiddenWithDelay = () => {
+    if (navOpen) {
+      setTimeout(() => {
+        setHidden(true);
+      }, 140);
+    } else {
+      setHidden(false);
+    }
+  };
+
+  if (navOpen !== hidden) {
+    toggleHiddenWithDelay();
+  }
+
   return (
-    <div className="w-screen h-screen ">
+    <div className="w-screen h-screen">
       <div className="h-screen w-screen bg-primary">
         <img src={BarBg} alt="" />
-        <div className="bg-primary z-0 flex flex-col items-center rounded-t-full h-[547px] w-full  bottom-0 absolute">
+        <div
+          className={`bg-primary z-10 flex flex-col items-center rounded-t-full h-[547px] w-full  bottom-0 ${
+            hidden ? "hidden" : "absolute"
+          }`}
+          style={{ transitionDelay: `${hidden ? "0s" : "0.5s"}` }}
+        >
           <div className="flex flex-col items-center mt-10">
             <svg
               width="35"
@@ -36,7 +57,6 @@ export default function HeroSection() {
           </div>
         </div>
       </div>
-      <div>heyooo</div>
     </div>
   );
 }
